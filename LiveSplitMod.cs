@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using System.IO;
+using MelonLoader;
 using UnityEngine;
 using static UnityEngine.Object;
 using Il2Cpp;
@@ -14,7 +15,9 @@ namespace LiveSplitMod
      */
     public class LiveSplitMod : MelonMod
     {
-        private PlayerController[] players;
+        private string listOfMods = "Active Mods \n";
+        
+        private PlayerController[]? players;
         private static int numPlayers = 0;
         private static int numEscaped = 0;
 
@@ -30,13 +33,20 @@ namespace LiveSplitMod
             {
                 lsm = new LiveSplitClient();
             }
+
+            foreach (MelonMod mod in RegisteredMelons)
+            {
+                listOfMods = listOfMods + mod.Info.Name + " by " + mod.Info.Author + "\n";
+            }
+
         }
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
-            if (sceneName == "MenuMenu")
+            if (sceneName == "MainMenu")
             {
                 inGame = false;
+                MelonEvents.OnGUI.Subscribe(DrawRegisteredMods, 100);
                 if (lsm == null)
                 {
                     MelonLogger.Msg(System.ConsoleColor.Green, "LiveSplitClient not created! How did you get here?");
@@ -48,6 +58,7 @@ namespace LiveSplitMod
             if (sceneName == "MainLevel")
             {
                 inGame = true;
+                MelonEvents.OnGUI.Unsubscribe(DrawRegisteredMods);
             }
         }
 
@@ -66,6 +77,11 @@ namespace LiveSplitMod
                     }
                 }
             }
+        }
+
+        private void DrawRegisteredMods()
+        {
+            GUI.Label(new Rect(10, 10, 500, 100), listOfMods);
         }
 
         //Start Timer when using ladder on level 0 
