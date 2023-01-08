@@ -14,6 +14,12 @@ namespace LiveSplitMod
      */
     public class LiveSplitMod : MelonMod
     {
+        private PlayerController[] players;
+        private static int numPlayers = 0;
+        private static int numEscaped = 0;
+
+        private bool inGame = false;
+
         private static LiveSplitClient? lsm;
 
         private static bool elevator = false;
@@ -30,6 +36,7 @@ namespace LiveSplitMod
         {
             if (sceneName == "MenuMenu")
             {
+                inGame = false;
                 if (lsm == null)
                 {
                     MelonLogger.Msg(System.ConsoleColor.Green, "LiveSplitClient not created! How did you get here?");
@@ -37,6 +44,27 @@ namespace LiveSplitMod
                 }
                 lsm.ResetTimer();
                 elevator = false;
+            }
+            if (sceneName == "MainLevel")
+            {
+                inGame = true;
+            }
+        }
+
+        public override void OnUpdate()
+        {
+            if (inGame)
+            {
+                players = FindObjectsOfType<PlayerController>();
+                if (numPlayers != players.Length)
+                {
+                    numPlayers = players.Length;
+                    MelonLogger.Msg(System.ConsoleColor.Magenta, "Players in Lobby");
+                    for (int i = 0; i < players.Length; i++)
+                    {
+                        MelonLogger.Msg(System.ConsoleColor.Magenta, players[i].name);
+                    }
+                }
             }
         }
 
@@ -250,14 +278,18 @@ namespace LiveSplitMod
             [HarmonyPrefix]
             internal static void OnTriggerEnterPrefix()
             {
-                MelonLogger.Msg(System.ConsoleColor.Green, "Testing Escape/Chase Ending");
-                if (lsm == null)
+                numEscaped++;
+                if (numEscaped == numPlayers)
                 {
-                    MelonLogger.Msg(System.ConsoleColor.Green, "LiveSplitClient not created! How did you get here?");
-                    return;
-                }
+                    MelonLogger.Msg(System.ConsoleColor.Green, "Testing Escape/Chase Ending");
+                    if (lsm == null)
+                    {
+                        MelonLogger.Msg(System.ConsoleColor.Green, "LiveSplitClient not created! How did you get here?");
+                        return;
+                    }
 
-                lsm.SplitTimer();
+                    lsm.SplitTimer();
+                }
             }
         }
 
