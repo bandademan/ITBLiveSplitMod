@@ -33,7 +33,7 @@ A MelonLoader mod that autosplits by sending commands to the livesplit server
 ## Questions/Issues
 If you have any questions or issues feel free to contact Mr. Monocle on discord
 
-### NOTE: ATM THE AUTO SPLITTER DOESNT WORK FOR ML 5.7 THUS DOESNT WORK FOR ITB 0.2.0 AND LOWER IM WORKING ON A VERSION FOR ML 5.7 SO PLEASE BE PATIENT - Mr. Monocle
+### NOTE: ATM THE AUTO SPLITTER DOESNT WORK FOR ML 5.7 THUS DOESNT WORK FOR ITB 0.2.0 AND LOWER IF THERE ARE REQUESTS FOR IT I WILL WORK ON A VERSION FOR ML 5.7 BUT IT WILL TAKE SOME TIME SO PLEASE BE PATIENT
 
 ## Details of things your installing
 MelonLoader is an open source mod loader for Unity games - Link: https://github.com/LavaGang/MelonLoader
