@@ -22,7 +22,7 @@ A MelonLoader mod that autosplits by sending commands to the livesplit server
   - Start LiveSplit and within your Layout Editor add a new item using the plus symbol and under control, called LiveSplit Server
   - Setup your Splits like the examples splits above
 
-## Once all the setups are complete you have everything you need to use the AutoSplitter
+### Once all the setups are complete you have everything you need to use the AutoSplitter
 
 ## How to Use
   - Start your LiveSplit Server by right clicking your LiveSplit and under 'Control' press 'Start Server'
