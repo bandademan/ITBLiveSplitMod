@@ -81,7 +81,11 @@ namespace LiveSplitMod
 
         private void DrawRegisteredMods()
         {
-            GUI.Label(new Rect(10, 10, 500, 100), listOfMods);
+            GUIStyle style = new GUIStyle();
+            style.alignment = TextAnchor.UpperRight;
+            style.normal.textColor = Color.white;
+
+            GUI.Label(new Rect(Screen.width - 500 - 10, 100, 500, 100), listOfMods, style);
         }
 
         //Start Timer when using ladder on level 0 
