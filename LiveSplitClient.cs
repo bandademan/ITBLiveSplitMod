@@ -14,7 +14,7 @@ public class LiveSplitClient
     NetworkStream? stream;
 
     //Bool used if the log should be printed or not
-    bool log = false;
+    bool log = true;
 
     /* 
      * Basic Constructor
