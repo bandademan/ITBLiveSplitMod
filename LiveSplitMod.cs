@@ -147,11 +147,11 @@ namespace LiveSplitMod
         }
 
         //Split Timer when the chain is cut after radiation
-        [HarmonyPatch(typeof(DoorChain), "CmdCutChain")]
+        [HarmonyPatch(typeof(DoorChain), "OnChainCut")]
         class DoorChainPatch
         {
             [HarmonyPrefix]
-            internal static void CMDCutChainPrefix()
+            internal static void OnChainCutPrefix()
             {
                 MelonLogger.Msg(System.ConsoleColor.Green, "Testing Chain Cut");
                 if (lsm == null)
